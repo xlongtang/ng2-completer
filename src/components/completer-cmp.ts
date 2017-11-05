@@ -24,15 +24,26 @@ const COMPLETER_CONTROL_VALUE_ACCESSOR = {
     selector: "ng2-completer",
     template: `
         <div class="completer-holder" ctrCompleter>
-            <input #ctrInput [attr.id]="inputId.length > 0 ? inputId : null" type="search" class="completer-input" ctrInput [ngClass]="inputClass"
-                [(ngModel)]="searchStr" (ngModelChange)="onChange($event)" [attr.name]="inputName" [placeholder]="placeholder"
-                [attr.maxlength]="maxChars" [tabindex]="fieldTabindex" [disabled]="disableInput"
-                [clearSelected]="clearSelected" [clearUnselected]="clearUnselected"
-                [overrideSuggested]="overrideSuggested" [openOnFocus]="openOnFocus" [fillHighlighted]="fillHighlighted" 
-                [openOnClick]="openOnClick" [selectOnClick]="selectOnClick" [selectOnFocus]="selectOnFocus"
-                (blur)="onBlur()" (focus)="onFocus()" (keyup)="onKeyup($event)" (keydown)="onKeydown($event)" (click)="onClick($event)"
-                autocomplete="off" autocorrect="off" autocapitalize="off" />
-
+            <div class="input-group completer-input-group">
+                <span class="input-group-btn search-btn">
+                   <button class="btn btn-link" type="button" (click)="onSearchClicked($event)">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                   </button>
+                </span>
+                <input #ctrInput [attr.id]="inputId.length > 0 ? inputId : null" type="search" class="completer-input" ctrInput [ngClass]="inputClass"
+                   [(ngModel)]="searchStr" (ngModelChange)="onChange($event)" [attr.name]="inputName" [placeholder]="placeholder"
+                   [attr.maxlength]="maxChars" [tabindex]="fieldTabindex" [disabled]="disableInput"
+                   [clearSelected]="clearSelected" [clearUnselected]="clearUnselected"
+                   [overrideSuggested]="overrideSuggested" [openOnFocus]="openOnFocus" [fillHighlighted]="fillHighlighted" 
+                   [openOnClick]="openOnClick" [selectOnClick]="selectOnClick" [selectOnFocus]="selectOnFocus"
+                   (blur)="onBlur()" (focus)="onFocus()" (keyup)="onKeyup($event)" (keydown)="onKeydown($event)" (click)="onClick($event)"
+                   autocomplete="off" autocorrect="off" autocapitalize="off" />
+                <span class="input-group-btn clear-btn" [hidden]="!searchStr">
+                   <button class="btn btn-link" type="button" (click)="onClearClicked($event)">
+                       <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                   </button>
+                </span>
+            </div>
             <div class="completer-dropdown-holder"
                 *ctrList="dataService;
                     minSearchLength: minSearchLength;
@@ -113,6 +124,18 @@ const COMPLETER_CONTROL_VALUE_ACCESSOR = {
         float: right;
         width: 90%;
     }
+    .completer-input-group .completer-input {
+        margin-left: -40px;
+        margin-right: -40px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .completer-input-group .search-btn {
+        z-index: 4;
+    }
+    .completer-input-group .clear-btn {
+        z-index: 3
+    }
     `],
     providers: [COMPLETER_CONTROL_VALUE_ACCESSOR]
 })
@@ -149,6 +172,7 @@ export class CompleterCmp implements OnInit, ControlValueAccessor, AfterViewChec
     @Output() public opened = new EventEmitter<boolean>();
     @Output() public keyup: EventEmitter<any> = new EventEmitter();
     @Output() public keydown: EventEmitter<any> = new EventEmitter();
+    @Output() public searchClicked = new EventEmitter<string>();
 
     @ViewChild(CtrCompleter) public completer: CtrCompleter;
     @ViewChild("ctrInput") public ctrInput: ElementRef;
@@ -325,5 +349,13 @@ export class CompleterCmp implements OnInit, ControlValueAccessor, AfterViewChec
 
     public isOpen() {
         return this._open;
+    }
+
+    public onSearchClicked(event: any) {
+        this.searchClicked.emit(this.searchStr);
+    }
+
+    public onClearClicked(event: any) {
+        this.searchStr = "";
     }
 }
