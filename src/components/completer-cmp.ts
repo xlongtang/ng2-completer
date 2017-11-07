@@ -352,10 +352,13 @@ export class CompleterCmp implements OnInit, ControlValueAccessor, AfterViewChec
     }
 
     public onSearchClicked(event: any) {
+        event.preventDefault();
         this.searchClicked.emit(this.searchStr);
     }
 
     public onClearClicked(event: any) {
+        event.preventDefault();
         this.searchStr = "";
+        this.focus();
     }
 }
