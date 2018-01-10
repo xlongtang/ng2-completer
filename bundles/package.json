@@ -1,0 +1,39 @@
+{
+  "name": "ng2-completer",
+  "version": "1.6.4",
+  "description": "ng2 autocomplete/typeahead component",
+  "main": "ng2-completer.umd.js",
+  "keywords": [
+    "angular2",
+    "autcomplete",
+    "typeahead",
+    "word completion",
+    "ng2"
+  ],
+  "author": "Ofer Herman <oferhe@gmail.com>",
+  "contributors": [
+    {
+      "name": "Andrew Rumm",
+      "email": "rayz@rayz.ru"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/oferh/ng2-completer/issues"
+  },
+  "license": "MIT",
+  "typings": "index.d.ts",
+  "repository": "oferh/ng2-completer",
+  "dependencies": {},
+  "peerDependencies": {
+    "@angular/common": "^5.1.1",
+    "@angular/compiler": "^5.1.1",
+    "@angular/core": "^5.1.1",
+    "@angular/forms": "^5.1.1",
+    "@angular/http": "^5.1.1",
+    "@angular/platform-browser": "^5.1.1",
+    "@angular/platform-browser-dynamic": "^5.1.1",
+    "rxjs": "^5.1.1",
+    "zone.js": "^0.8.4"
+  },
+  "module": "index.js"
+}
