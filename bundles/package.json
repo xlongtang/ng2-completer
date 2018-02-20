@@ -1,6 +1,6 @@
 {
   "name": "ng2-completer",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "ng2 autocomplete/typeahead component",
   "main": "ng2-completer.umd.js",
   "keywords": [
