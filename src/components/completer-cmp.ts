@@ -25,7 +25,7 @@ const COMPLETER_CONTROL_VALUE_ACCESSOR = {
     template: `
         <div class="completer-holder" ctrCompleter>
             <div class="input-group completer-input-group">
-                <span class="input-group-btn search-btn">
+                <span class="input-group-prepend search-btn">
                    <button class="btn btn-link" type="button" (click)="onSearchClicked($event)">
                       <i class="fa fa-search" aria-hidden="true"></i>
                    </button>
@@ -38,7 +38,7 @@ const COMPLETER_CONTROL_VALUE_ACCESSOR = {
                    [openOnClick]="openOnClick" [selectOnClick]="selectOnClick" [selectOnFocus]="selectOnFocus"
                    (blur)="onBlur()" (focus)="onFocus()" (keyup)="onKeyup($event)" (keydown)="onKeydown($event)" (click)="onClick($event)"
                    autocomplete="off" autocorrect="off" autocapitalize="off" />
-                <span class="input-group-btn clear-btn" [hidden]="!searchStr">
+                <span class="input-group-append clear-btn" [hidden]="!searchStr">
                    <button class="btn btn-link" type="button" (click)="onClearClicked($event)">
                        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                    </button>
